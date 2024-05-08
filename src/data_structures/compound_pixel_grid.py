@@ -4,7 +4,7 @@ import copy
 from data_structures.vectors import Position2D, Vector2D
 from data_structures.angle import Angle
 import math
-from flow_control.step_counter import StepCounter
+from flow_control.step_counter import StepCounter 
 
 class CompoundExpandablePixelGrid:
     def __init__(self, initial_shape, pixel_per_m, robot_radius_m):
@@ -182,6 +182,7 @@ class CompoundExpandablePixelGrid:
         #matrix[self.arrays['walls']] = 255  
         #matrix[self.arrays['occupied']] = 128  
         #matrix[self.arrays['traversable']] = 64
-        matrix[self.arrays['victims']] = 32 
+        #matrix[self.arrays['victims']] = 32 
+        matrix[self.arrays['traversed']] = 1
 
         return matrix

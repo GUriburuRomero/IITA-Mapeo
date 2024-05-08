@@ -5,7 +5,7 @@ import math
 import skimage
 
 import numpy as np
-import cv2 as cv
+import cv2 as cv 
 
 from flags import SHOW_MAP_AT_END, DO_SAVE_FINAL_MAP, SAVE_FINAL_MAP_DIR, DO_SAVE_DEBUG_GRID, SAVE_DEBUG_GRID_DIR
 
@@ -93,6 +93,8 @@ class WallMatrixCreator:
                 val = self.__get_tile_status(min_x, min_y, max_x, max_y, wall_array)
                 
                 row.append(list(val))
+                
+                print(val)
             grid.append(row)
         
         if SHOW_MAP_AT_END:
@@ -243,14 +245,14 @@ class FinalMatrixCreator:
         
         # Walls
         wall_node_array = self.wall_matrix_creator.transform_wall_array_to_bool_node_array(wall_array, offsets)
-        print("Este es el wall node array: ")
-        print(wall_node_array)
+        #print("Este es el wall node array: ")
+        #print(wall_node_array)
 
         # Victimas
         floor_offsets = self.__get_offsets(self.__square_size_px * 2, pixel_grid.offsets + self.__square_size_px)
         vict_node_array = self.wall_matrix_creator.transform_wall_array_to_bool_node_array(victims, offsets)
-        print("Este es el victim node array: ")
-        print(vict_node_array)
+        #print("Este es el victim node array: ")
+        #print(vict_node_array)
 
 
         # Floor
@@ -274,7 +276,7 @@ class FinalMatrixCreator:
         # Mix everything togehter
         text_grid = self.__get_final_text_grid(wall_node_array, floor_string_array, robot_node)
 
-        print(pixel_grid.convert_to_matrix()) ## Muestra los datos del array ['Victims']
+        #print(pixel_grid.convert_to_matrix()) ## Muestra los datos del array ['Victims']
 
         return np.array(text_grid)
 
