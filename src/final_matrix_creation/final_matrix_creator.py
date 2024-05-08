@@ -246,15 +246,21 @@ class FinalMatrixCreator:
         print("Este es el wall node array: ")
         print(wall_node_array)
 
+        # Victimas
         floor_offsets = self.__get_offsets(self.__square_size_px * 2, pixel_grid.offsets + self.__square_size_px)
+        vict_node_array = self.wall_matrix_creator.transform_wall_array_to_bool_node_array(victims, offsets)
+        print("Este es el victim node array: ")
+        print(vict_node_array)
+
 
         # Floor
+        floor_offsets = self.__get_offsets(self.__square_size_px * 2, pixel_grid.offsets + self.__square_size_px)
         floor_string_array = self.floor_matrix_creator.get_floor_colors(color_array, floor_offsets)
 
         # Victims
-        victims_node_array = self.wall_matrix_creator.transform_wall_array_to_bool_node_array(victims, offsets)
-        print("este es el victims node array")
-        print(victims_node_array)
+        #victims_node_array = self.wall_matrix_creator.transform_wall_array_to_bool_node_array(victims, offsets)
+        #print("este es el victims node array")
+        #print(victims_node_array)
 
         # Start tile
         if robot_start_position is None:
@@ -268,7 +274,7 @@ class FinalMatrixCreator:
         # Mix everything togehter
         text_grid = self.__get_final_text_grid(wall_node_array, floor_string_array, robot_node)
 
-        print(pixel_grid.convert_to_matrix())
+        print(pixel_grid.convert_to_matrix()) ## Muestra los datos del array ['Victims']
 
         return np.array(text_grid)
 

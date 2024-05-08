@@ -148,7 +148,7 @@ class FixtureDetector:
 
                 # Agregar las coordenadas a la lista de victimas
                 self.victims_coordinates.append(pos)
-                print("COORDENADAS:", self.victims_coordinates, fixtures_detected)
+                #print("COORDENADAS:", self.victims_coordinates, fixtures_detected)
 
         #for fixture_index, fixture_detected in enumerate(fixtures_detected):
             #if fixture_detected:
