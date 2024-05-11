@@ -295,7 +295,7 @@ class Executor:
         final_matrix = self.final_matrix_creator.pixel_grid_to_final_grid(self.mapper.pixel_grid, self.mapper.start_position)
         self.robot.comunicator.send_map(final_matrix)
         self.robot.comunicator.send_end_of_play()
-        self.mapper.visualize_grid()
+        #self.mapper.visualize_grid()
 
     def state_send_map(self, change_state_function):
         final_matrix = self.final_matrix_creator.pixel_grid_to_final_grid(self.mapper.pixel_grid, self.mapper.start_position)

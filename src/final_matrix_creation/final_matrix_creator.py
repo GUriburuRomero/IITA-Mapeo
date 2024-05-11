@@ -73,12 +73,19 @@ class WallMatrixCreator:
             if count >= self.threshold:
                 status.append(orientation)
 
+        #print("Status:", status)
         return status
 
     def transform_wall_array_to_bool_node_array(self, wall_array: np.ndarray, offsets: np.ndarray) -> np.ndarray:
+        ''' Crea la estructura de la grilla '''
         grid = []
         if SHOW_MAP_AT_END:
             bool_array_copy = wall_array.astype(np.uint8) * 100
+        print("Este es el offsets[0]", offsets[0])
+        print("Este es el offsets[1]", offsets[1])
+        print("Este es el square size:", self.__square_size_px)
+        print("Esta es el shape: ",wall_array.shape[0])
+        print("Este es el shape 2:", wall_array.shape[1])
         for x in range(offsets[0], wall_array.shape[0] - self.__square_size_px, self.__square_size_px):
             row = []
             for y in range(offsets[1], wall_array.shape[1] - self.__square_size_px, self.__square_size_px):
@@ -94,17 +101,21 @@ class WallMatrixCreator:
                 
                 row.append(list(val))
                 
-                print(val)
+                #print(val)
             grid.append(row)
+            print("!!!!------------------------------------!!!!")
+            print(grid)
         
         if SHOW_MAP_AT_END:
             cv.imshow("point_cloud_with_squares", cv.resize(bool_array_copy, (0, 0), fx=1, fy=1, interpolation=cv.INTER_AREA))
-
+        print("Esta es la grilla previa ---------------------------")
+        print(grid)
         grid = self.__orientation_grid_to_final_wall_grid(grid)
 
         return grid
     
     def __orientation_grid_to_final_wall_grid(self, orientation_grid: list) -> np.ndarray:
+        ''' Rellena con datos la grilla base '''
         shape = np.array([len(orientation_grid), len(orientation_grid[0])])
         shape *= 2
 
@@ -121,6 +132,8 @@ class WallMatrixCreator:
 
                     final_wall_grid[final_y, final_x] = True
         
+        print("Este es el final_wall_grid: ")
+        print(final_wall_grid)
         return final_wall_grid
     
 
@@ -235,6 +248,14 @@ class FinalMatrixCreator:
         color_array = pixel_grid.arrays["floor_color"]
         victims = pixel_grid.arrays["victims"]
 
+        #print("------ ESTE ES EL TIPO --------------")
+        #print(type(wall_array))
+
+        #print("----------------- PAREDES --------------------------")
+        #print(wall_array)
+        #print("----------------- VICTIMAS ------------------------")
+        #print(victims)
+
         if DO_SAVE_FINAL_MAP:
             cv.imwrite(f"{SAVE_FINAL_MAP_DIR}/WALL_PIXEL_GRID{str(time.time()).rjust(50)}.png", wall_array.astype(np.uint8) * 255)
 
@@ -275,7 +296,7 @@ class FinalMatrixCreator:
 
         # Mix everything togehter
         text_grid = self.__get_final_text_grid(wall_node_array, floor_string_array, robot_node)
-
+        print(text_grid)
         #print(pixel_grid.convert_to_matrix()) ## Muestra los datos del array ['Victims']
 
         return np.array(text_grid)

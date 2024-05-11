@@ -179,10 +179,10 @@ class CompoundExpandablePixelGrid:
     
     def convert_to_matrix(self):
         matrix = np.zeros((self.array_shape[0], self.array_shape[1]), dtype=np.uint8)
-        #matrix[self.arrays['walls']] = 255  
+        matrix[self.arrays['walls']] = 255  
         #matrix[self.arrays['occupied']] = 128  
         #matrix[self.arrays['traversable']] = 64
-        #matrix[self.arrays['victims']] = 32 
-        matrix[self.arrays['traversed']] = 1
+        matrix[self.arrays['victims']] = 32 
+        #matrix[self.arrays['traversed']] = 1
 
         return matrix
